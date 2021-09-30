@@ -3,6 +3,7 @@
  * genius_mouse.c
  * 
  * copied main.c
+ * Training several times (test1, test2...)
  */
 
 #include <stdio.h>
