@@ -1,0 +1,42 @@
+
+name: ml-model-ci/cd 
+
+on: [push]
+
+jobs:
+  train_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: iterative/setup-cml@v1  
+        
+      - name: source model
+        run: 
+          python src.py
+  
+      - name: train 
+        run: 
+          python mouse.py
+          
+      - name: Artifacts
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p my-artifacts
+          cat LogFile.log > my-artifacts/logs.log
+
+      - uses: actions/upload-artifact@v2
+        with:
+            name: my-artifact
+            path: | 
+             my-artifacts/logs.log
+
+            
+      - name: Write report
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+            echo "## metrics" > report.md
+            cat logs.log >> report.md
+            cml-send-comment report.md
