@@ -13,11 +13,11 @@ jobs:
         
       - name: source model
         run: 
-          src.py
+          python src.py
   
       - name: train 
         run: 
-          mouse.py
+          python mouse.py
           
       - name: Artifacts
         env:
