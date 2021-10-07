@@ -28,17 +28,20 @@ jobs:
         run: |
           mkdir -p my-artifacts
           cat LogFile.log > my-artifacts/logs.log
+          cat results.txt > my-artifacts/results.txt
 
       - uses: actions/upload-artifact@v2
         with:
             name: my-artifact
             path: | 
              my-artifacts/logs.log
+             my-artifacts/results.txt
+
             
       - name: Write report
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
             echo "## Results" > report.md
-            cat LogFile.log >> report.md
+            cat results.txt >> report.md
             cml-send-comment report.md
