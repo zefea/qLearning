@@ -20,8 +20,9 @@ def main():
     for row in rewards:
         print(row)
 
-    path = os.getcwd()
-    fileName = path + "/LogFile.log"
+    mainPath = os.getcwd() 
+    path = mainPath + '/outputs/'
+    fileName = path + "LogFile.log"
 
     logging.basicConfig(handlers=[logging.FileHandler(fileName, 'w', 'utf-8')], level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
@@ -31,7 +32,7 @@ def main():
     a,b = training(0,0)
     logging.info(a)
 
-    writeOutput('results.txt',b)
+    writeOutput(path + 'results.txt',b)
     
             
     

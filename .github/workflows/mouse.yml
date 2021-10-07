@@ -27,8 +27,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p my-artifacts
-          cat LogFile.log > my-artifacts/logs.log
-          cat results.txt > my-artifacts/results.txt
+          cat outputs/LogFile.log > my-artifacts/logs.log
+          cat outputs/results.txt > my-artifacts/results.txt
 
       - uses: actions/upload-artifact@v2
         with:
@@ -43,5 +43,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
             echo "## Results" > report.md
-            cat results.txt >> report.md
+            cat outputs/results.txt >> report.md
+            cml-publish outputs/figure.png --md >> report.md
             cml-send-comment report.md

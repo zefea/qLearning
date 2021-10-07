@@ -177,7 +177,10 @@ def training(curr_row, curr_col):
     plt.ylabel('Step number')
     
     plt.title('Episode & Steps')
-    plt.savefig('figure.png')
+    mainPath = os.getcwd() 
+    path = mainPath + '/outputs/'
+    
+    plt.savefig(path + 'figure.png')
     plt.show()
     
     return q_table, paths[size-5:] 
