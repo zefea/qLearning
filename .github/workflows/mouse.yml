@@ -40,5 +40,5 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
             echo "## Results" > report.md
-            cat logFile.log >> report.md
+            cat LogFile.log >> report.md
             cml-send-comment report.md
