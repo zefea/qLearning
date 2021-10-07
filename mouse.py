@@ -18,18 +18,7 @@ def main():
     logging.info('Started')
     a,b = training(0,0)
     logging.info(a)
-
-    
-    # Now print to file
-    print("writing the metrics to a json file...")
-
-    with open("metrics.json", 'w', encoding='utf-8') as outfile:
-        json.dump(a, outfile, indent=2)
-
-    for i in range(len(b)):
-        logging.info("Path: " + str(b[i]))
-        with open("metrics.json", 'w', encoding='utf-8') as outfile:
-            json.dump(a, outfile, indent=2)
+    logging.info(b)
 
 if __name__ == "__main__":
     main()

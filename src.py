@@ -2,7 +2,7 @@
 
 import os
 import logging
-import json
+import codecs, json 
 import numpy as np
 from numpy.core.fromnumeric import argmax
 

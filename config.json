@@ -4,6 +4,22 @@
 			"row": 4,
 			"column": 5	
 		}
+	],
+	"parameters": [
+		{
+			"epsilon": 0.2, 
+			"alpha": 0.1,
+			"gamma": 0.9,
+			"episode_number": 5,
+			"var_number": 20
+		}
+	],
+	"selection":[
+		{
+			"softmax": false,
+			"allRandom": true
+
+		}
 	]
 
 }
