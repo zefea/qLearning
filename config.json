@@ -5,20 +5,30 @@
 			"column": 5	
 		}
 	],
+	"start": [
+		{
+			"random values of q": false,
+			"all_zero": true,
+			"loc_x": 0 , 
+			"loc_y": 0, 
+			"loc_random": false
+
+		}
+	],
 	"parameters": [
 		{
 			"epsilon": 0.2, 
 			"alpha": 0.1,
 			"gamma": 0.9,
 			"episode_number": 5,
-			"var_number": 20
+			"var_number": 20,
+			"reward": -1
 		}
 	],
 	"selection":[
 		{
 			"softmax": false,
 			"allRandom": true
-
 		}
 	]
 

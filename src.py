@@ -4,6 +4,7 @@ import os
 import logging
 import codecs, json 
 import numpy as np
+import matplotlib.pyplot as plt
 from numpy.core.fromnumeric import argmax
 
 #Enviorement 
@@ -31,10 +32,36 @@ cheese_loc_row = env_row-1
 cheese_loc_col = env_column-1
 
 # rewards, 100 for cheese, -1 for each state
-rewards = np.full((env_row,env_column),0)
+rewards = np.full((env_row,env_column),-1)
 rewards[cheese_loc_row, cheese_loc_col] = 100
 
 print(type(rewards[0,0]))
+
+def doTheMath(q_values,t):
+    qALL = 0
+    dist = []
+    for x in q_values:
+        qALL = np.exp(x/t)
+	
+    for y in range(len(q_values)):
+        dist.append(np.exp(q_values[y,1]/t)/qALL)
+
+    print("distrubition with softmax")
+    print(dist)
+
+    return dist
+	
+
+def chooseWithSoftmax(state): 
+
+    q_values = []
+    max_val = max(q_table[state])
+
+    for val in q_table[state]:
+        if val != max_val:
+            q_values.append(q_table[state].index(val),val)
+
+
 
 def getAction(state,epsilon):
 
@@ -142,7 +169,18 @@ def training(curr_row, curr_col):
         
     size = len(paths)
     
-    return q_table, paths[size-5:]
+    # plotting the points
+    x = range(episode)
+    plt.plot(x,stepList)
+    plt.legend()
+    plt.xlabel('Episode')
+    plt.ylabel('Step number')
+    
+    plt.title('Episode & Steps')
+    plt.savefig('figure.png')
+    plt.show()
+    
+    return q_table, paths[size-5:] 
 
 
 
