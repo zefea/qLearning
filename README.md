@@ -1,5 +1,3 @@
-# qLearning
-
 ## Implementation of Q-learning algorithm
 
 The aim is to train the mouse as to be able to find the cheese with the best/closest path possible. 
