@@ -225,7 +225,7 @@ class Train:
         
     def toString(self):
         gridInfo = "Grid: " + str(self.env_row) + "x" + str(self.env_column)
-        parameterInfo = "Expolarative selection: " + self.decision
+        parameterInfo = "Explorative selection: " + self.decision
         episodeInfo = "Number of episodes: " + str(self.episode)
 
         return gridInfo + "\n" +parameterInfo + "\n" + episodeInfo + "\n"
