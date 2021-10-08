@@ -28,7 +28,7 @@
 	"selection":[
 		{
 			"softmax": false,
-			"allRandom": true
+			"random": true
 		}
 	]
 
