@@ -16,7 +16,7 @@ jobs:
         
       - name: source model
         run: 
-          python src.py
+          python Train.py
   
       - name: train 
         run: 
