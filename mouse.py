@@ -4,6 +4,8 @@
 from os import write
 from src import *
 
+
+
 def writeOutput(filename,b):
     with open(filename, 'w') as f:
         f.write('Results\n')
@@ -29,11 +31,13 @@ def main():
     logging.info('Started')
 
     #training --> q-table and last 5 path
-    a,b = training(0,0)
+    a,b,c = training(0,0,decision='softmax3')
     logging.info(a)
+    
+    for i in range(10):
+        testing(0,0,c)
 
     writeOutput(path + 'results.txt',b)
-    
             
     
 if __name__ == "__main__":
