@@ -1,0 +1,51 @@
+
+name: ml-model-ci/cd 
+
+on: [push]
+
+jobs:
+  train_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: iterative/setup-cml@v1
+
+      - name: Install requirements for training
+        run: pip install --quiet --requirement requirements.txt  
+        
+      - name: source model
+        run: 
+          python src.py
+  
+      - name: train 
+        run: 
+          python mouse.py
+          
+      - name: Artifacts
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p my-artifacts
+          cat outputs/LogFile.log > my-artifacts/logs.log
+          cat outputs/results.txt > my-artifacts/results.txt
+          cat outputs/results-2.txt > my-artifacts/results-2.txt
+
+      - uses: actions/upload-artifact@v2
+        with:
+            name: my-artifact
+            path: | 
+             my-artifacts/logs.log
+             my-artifacts/results.txt
+             my-artifacts/results-2.txt
+
+            
+      - name: Write report
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+            echo "## Results" > report.md
+            cat outputs/results.txt >> report.md
+            cat outputs/results-2.txt >> report.md
+            cml-publish outputs/grid10x10.png --md >> report.md
+            cml-send-comment report.md
