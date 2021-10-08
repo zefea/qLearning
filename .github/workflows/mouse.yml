@@ -46,7 +46,6 @@ jobs:
         run: |
             echo "## Results" > report.md
             cat outputs/results.txt >> report.md
-            echo "------------------------------------" >> report.md
             cat outputs/results-2.txt >> report.md
             cml-publish outputs/grid10x10.png --md >> report.md
             cml-send-comment report.md

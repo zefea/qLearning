@@ -223,9 +223,6 @@ class Train:
         mainPath = os.getcwd() 
         path = mainPath + '/outputs/'
         
-        
-        
-
     def toString(self):
         gridInfo = "Grid: " + str(self.env_row) + "x" + str(self.env_column)
         parameterInfo = "Expolarative selection: " + self.decision
