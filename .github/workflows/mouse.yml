@@ -29,6 +29,7 @@ jobs:
           mkdir -p my-artifacts
           cat outputs/LogFile.log > my-artifacts/logs.log
           cat outputs/results.txt > my-artifacts/results.txt
+          cat outputs/results-2.txt > my-artifacts/results-2.txt
 
       - uses: actions/upload-artifact@v2
         with:
@@ -36,6 +37,7 @@ jobs:
             path: | 
              my-artifacts/logs.log
              my-artifacts/results.txt
+             my-artifacts/results-2.txt
 
             
       - name: Write report
@@ -44,5 +46,7 @@ jobs:
         run: |
             echo "## Results" > report.md
             cat outputs/results.txt >> report.md
-            cml-publish outputs/figure.png --md >> report.md
+            echo "------------------------------------" >> report.md
+            cat outputs/results-2.txt >> report.md
+            cml-publish outputs/grid10x10.png --md >> report.md
             cml-send-comment report.md

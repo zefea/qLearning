@@ -26,6 +26,9 @@ class Train:
         # define actions
         self.actions = ['up', 'right', 'down', 'left']
 		
+    def getQtable(self):
+        return self.q_table
+
     def initQtable(self,row,column):
         states = row * column
         self.q_table = np.zeros((states, 4))
@@ -36,31 +39,23 @@ class Train:
         dist = np.zeros((len(q_values), 2))
 
         for x in q_values:
-            #print("addition of value: ",x[1])
             qALL += np.exp(x[1]/t)
         
         for y in q_values:
-            #print("the value:",y[1])
             dist[i,0] = np.exp(y[1]/t)/qALL
             dist[i,1] = y[0]
             i += 1 
-        
-        #print("distrubition with softmax")
-        #print(dist)
 
         return np.flip(dist, axis=0)
 
     def numberOfMax(self,state):
         max_val = max(self.q_table[state])
-        #print("max number is ", max_val)
-        #print(self.q_table[state]) 
         count = 0
         for i in range(4):
             val = self.q_table[state,i]
             if val != max_val: 
                 count += 1  
-        
-        #print("count : ", count)
+
         return count, max_val
 
     def chooseWithSoftmax(self,state): 
@@ -87,12 +82,7 @@ class Train:
 
         sortedQ = np.core.records.fromarrays(q_values.transpose(), names="col1, col2")
         sortedQ.sort(order="col2")
-        #print("SORTED")
-        #print(sortedQ)
-
         probs = self.doTheMath(sortedQ,5)
-        #print("Probs")
-        #print(probs)
 
         selectAction = -1
         rand_num =  np.random.random()
@@ -164,7 +154,7 @@ class Train:
         episode = 0
         paths = []
         stepList = []
-        epsilon =  0.25
+        epsilon =  0.2
 
         #for done in range(episode_number):
         while terminate:
@@ -220,7 +210,7 @@ class Train:
         self.episode = episode
         self.stepList = stepList
 
-        return self.q_table, paths[size-5:], epsilon
+        return paths[size-5:], epsilon
 
     def plotTraining(self):
          # plotting the points
@@ -229,16 +219,16 @@ class Train:
         plt.legend()
         plt.xlabel('Episode')
         plt.ylabel('Step number')
-        plt.title('Episode vs Steps for ' + self.decision + 'selection')
+        plt.title(self.decision + ' selection')
         mainPath = os.getcwd() 
         path = mainPath + '/outputs/'
         
-        plt.savefig(path + self.decision + '-figure.png')
-        plt.show()
+        
         
 
+    def toString(self):
+        gridInfo = "Grid: " + str(self.env_row) + "x" + str(self.env_column)
+        parameterInfo = "Expolarative selection: " + self.decision
+        episodeInfo = "Number of episodes: " + str(self.episode)
 
-    #information trace
-    def trace(self):
-        message = " Poll created: " + self.pollName + " created"
-        logging.info(message)
+        return gridInfo + "\n" +parameterInfo + "\n" + episodeInfo + "\n"
