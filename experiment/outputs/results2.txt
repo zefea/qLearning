@@ -1,0 +1,9 @@
+Results
+Grid: 5x5
+Explorative selection: 
+Number of episodes: 781
+[[0, 0], [0, 4], [4, 4]] --> number of steps: 2
+[[0, 0], [0, 4], [4, 4]] --> number of steps: 2
+[[0, 0], [0, 4], [4, 4]] --> number of steps: 2
+[[0, 0], [0, 4], [4, 4]] --> number of steps: 2
+[[0, 0], [0, 4], [4, 4]] --> number of steps: 2
